@@ -1,0 +1,18 @@
+# Obsidian per-device state, never shared
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspace/
+.obsidian/cache/
+.obsidian/plugins/
+
+# macOS and editor noise
+.DS_Store
+._*
+*.swp
+
+# Python bytecode from the vault's own scripts in System/Setup/
+__pycache__/
+*.pyc
+
+# Obsidian trash
+.trash/

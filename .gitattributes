@@ -1,0 +1,20 @@
+# Append-only logs: both sides' new lines are kept instead of raising a conflict.
+# These files only ever gain lines, so a union merge cannot lose anything.
+#
+# A pattern here must not contain a space: git splits each line on the first whitespace, so
+# "System/Run log.md merge=union" would be read as the pattern "System/Run" and silently do
+# nothing. Use a wildcard instead, and check any change with `git check-attr merge -- <path>`.
+#
+# Approvals.md cannot use union, because its rows are edited in place and union would leave two
+# copies of one row. It gets a row-aware driver instead, which merges the table by id and settles a
+# row both sides changed by taking whichever moved it further along (System/Setup/Vault sync.md).
+System/Run?log.md merge=union
+System/Corrections.md merge=union
+System/Chat.md merge=union
+*build?log.md merge=union
+System/Setup/Watcher?lock.md merge=union
+System/Approvals.md merge=approvals
+# The Owlbridge pipeline table is edited in place by the platform's Leads area and by runs.
+Wiki/Ventures/Owlbridge/Owlbridge?growth/Owlbridge?pipeline.md merge=approvals
+# The activity log only ever gains lines, so union is safe.
+Wiki/Ventures/Owlbridge/Owlbridge?growth/Owlbridge?activity?log.md merge=union
